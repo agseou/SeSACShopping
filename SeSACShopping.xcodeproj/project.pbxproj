@@ -12,6 +12,8 @@
 		A01B3EEC2B594EA6004D3F9C /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01B3EEB2B594EA6004D3F9C /* Shopping.swift */; };
 		A01B3EF42B5A5247004D3F9C /* EmptyHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01B3EF22B5A5247004D3F9C /* EmptyHistoryTableViewCell.swift */; };
 		A01B3EF52B5A5247004D3F9C /* EmptyHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01B3EF32B5A5247004D3F9C /* EmptyHistoryTableViewCell.xib */; };
+		A01B3EF82B5A5CF9004D3F9C /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01B3EF72B5A5CF9004D3F9C /* Onboarding.storyboard */; };
+		A01B3EFA2B5A5D0D004D3F9C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01B3EF92B5A5D0D004D3F9C /* OnboardingViewController.swift */; };
 		A01D3D4D2B58FFBE00C1AC43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D3D4C2B58FFBE00C1AC43 /* AppDelegate.swift */; };
 		A01D3D4F2B58FFBE00C1AC43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D3D4E2B58FFBE00C1AC43 /* SceneDelegate.swift */; };
 		A01D3D562B58FFC100C1AC43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D3D552B58FFC100C1AC43 /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		A01B3EEB2B594EA6004D3F9C /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
 		A01B3EF22B5A5247004D3F9C /* EmptyHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		A01B3EF32B5A5247004D3F9C /* EmptyHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A01B3EF72B5A5CF9004D3F9C /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		A01B3EF92B5A5D0D004D3F9C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A01D3D492B58FFBE00C1AC43 /* SeSACShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D3D4C2B58FFBE00C1AC43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01D3D4E2B58FFBE00C1AC43 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		A01B3EF62B5A5CE8004D3F9C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A01B3EF72B5A5CF9004D3F9C /* Onboarding.storyboard */,
+				A01B3EF92B5A5D0D004D3F9C /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		A01D3D402B58FFBE00C1AC43 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,7 @@
 				A01D3D632B59009700C1AC43 /* Model */,
 				A01D3D662B5900FE00C1AC43 /* Search */,
 				A01D3D672B59010700C1AC43 /* Setting */,
+				A01B3EF62B5A5CE8004D3F9C /* Onboarding */,
 				A01D3D4C2B58FFBE00C1AC43 /* AppDelegate.swift */,
 				A01D3D4E2B58FFBE00C1AC43 /* SceneDelegate.swift */,
 				A01D3D552B58FFC100C1AC43 /* Assets.xcassets */,
@@ -222,6 +236,7 @@
 				A01D3D6D2B5901F700C1AC43 /* Search.storyboard in Resources */,
 				A01D3D562B58FFC100C1AC43 /* Assets.xcassets in Resources */,
 				A01D3D6F2B5901FD00C1AC43 /* Setting.storyboard in Resources */,
+				A01B3EF82B5A5CF9004D3F9C /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +254,7 @@
 				A01D3D692B5901E400C1AC43 /* SettingViewController.swift in Sources */,
 				A01D3D752B5902EB00C1AC43 /* APIKey.swift in Sources */,
 				A01D3D7A2B5904D600C1AC43 /* Protocol.swift in Sources */,
+				A01B3EFA2B5A5D0D004D3F9C /* OnboardingViewController.swift in Sources */,
 				A01B3EE92B593F36004D3F9C /* SearchHistoryTableViewCell.swift in Sources */,
 				A01B3EF42B5A5247004D3F9C /* EmptyHistoryTableViewCell.swift in Sources */,
 			);

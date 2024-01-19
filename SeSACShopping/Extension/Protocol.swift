@@ -11,6 +11,11 @@ protocol autoCompletion {
     static var identifier: String { get }
 }
 
+extension UIViewController: autoCompletion {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
 
 extension UITableViewCell: autoCompletion {
     static var identifier: String {
