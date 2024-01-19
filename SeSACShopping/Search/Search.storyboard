@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Fh-fq-dZH">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -16,13 +16,59 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8TC-17-qJV">
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8Ci-uf-QJ5">
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="54j-JC-mGa"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8Ci-uf-QJ5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DAH-WQ-X4A"/>
+                            <constraint firstItem="8TC-17-qJV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JDR-Ni-1lf"/>
+                            <constraint firstItem="8TC-17-qJV" firstAttribute="top" secondItem="8Ci-uf-QJ5" secondAttribute="bottom" id="Spi-lc-r3X"/>
+                            <constraint firstItem="8Ci-uf-QJ5" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="XRw-cA-agy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8TC-17-qJV" secondAttribute="bottom" id="eAA-Ha-zEe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8TC-17-qJV" secondAttribute="trailing" id="geN-YD-VDm"/>
+                            <constraint firstItem="8Ci-uf-QJ5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="msT-8c-taZ"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="gpi-Na-Jsb"/>
+                    <connections>
+                        <outlet property="searchBar" destination="8Ci-uf-QJ5" id="g04-P0-AYv"/>
+                        <outlet property="searchHistroyTableView" destination="8TC-17-qJV" id="Ueu-RT-VEQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="-2"/>
+            <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pAa-L7-2Wu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Fh-fq-dZH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Dhe-sw-jde">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="jCv-FH-R5u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEm-Sk-o4y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
