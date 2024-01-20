@@ -22,3 +22,9 @@ extension UITableViewCell: autoCompletion {
         return String(describing: self)
     }
 }
+extension UICollectionViewCell: autoCompletion {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
+

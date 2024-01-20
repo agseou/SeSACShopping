@@ -16,12 +16,14 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.searchController?.tabBarItem.title =  "검색"
+        navigationItem.searchController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+        navigationItem.searchController?.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
 
         registerCell()
         configureTableView()
         searchBar.searchBarStyle = .minimal
-        
-        
         
     }
     
@@ -46,7 +48,6 @@ class SearchViewController: UIViewController {
     }
     
 }
-
 
 extension SearchViewController: UISearchBarDelegate {
     

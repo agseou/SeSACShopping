@@ -18,6 +18,8 @@ class OnboardingViewController: UIViewController {
         
         configureView()
         
+        startBtn.addTarget(self, action: #selector(tapStartBtn), for: .touchUpInside)
+        
     }
     
     func configureView(){
@@ -34,9 +36,12 @@ class OnboardingViewController: UIViewController {
         
     }
     
-    @IBAction func tapStartBtn(_ sender: UIButton) {
+    @objc func tapStartBtn(_ sender: UIButton) {
         
+        let sb = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: ProfileNameSettingViewController.identifier) as! ProfileNameSettingViewController
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
