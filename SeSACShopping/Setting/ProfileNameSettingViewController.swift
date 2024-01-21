@@ -14,16 +14,29 @@ class ProfileNameSettingViewController: UIViewController {
     @IBOutlet var noticeLabel: UILabel!
     @IBOutlet var completeBtn: UIButton!
     @IBOutlet var dividerView: UIView!
+    @IBOutlet var cameraIconView: UIImageView!
+    @IBOutlet var ProfileImageBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ProfileImageBtn.addTarget(self, action: #selector(tapProfileImageBtn), for: .touchUpInside)
 
         completeBtn.addTarget(self, action: #selector(tapCompleteBtn), for: .touchUpInside)
+        
         
         configureView()
     }
     
-    @objc func tapCompleteBtn(){
+    @objc func tapProfileImageBtn() {
+        
+        let sb = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: ProfileImageSettingViewController.identifier) as! ProfileImageSettingViewController
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func tapCompleteBtn() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "MainTabBarContoroller") as! UITabBarController
         
@@ -42,6 +55,10 @@ class ProfileNameSettingViewController: UIViewController {
         }
         profileImageView.layer.borderColor = UIColor.accent.cgColor
         profileImageView.layer.borderWidth = 5
+    
+        cameraIconView.image = UIImage(resource: .camera)
+        
+        ProfileImageBtn.setTitle("", for: .normal)
         
         nameTextField.placeholder = "닉네임을 입력해주세요"
         nameTextField.backgroundColor = .clear
