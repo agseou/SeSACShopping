@@ -116,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="00w-9M-kOk">
-                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <rect key="frame" x="0.0" y="279" width="393" height="539"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="u6B-Ip-O3r">
                                     <size key="itemSize" width="128" height="128"/>
@@ -135,23 +135,33 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CmI-oH-fRe">
+                                <rect key="frame" x="121.66666666666669" y="89" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CmI-oH-fRe" secondAttribute="height" multiplier="1:1" id="2jB-CX-LqZ"/>
+                                    <constraint firstAttribute="width" constant="150" id="pzR-qe-Qwc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="00w-9M-kOk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="M3d-6g-Dfd"/>
+                            <constraint firstItem="CmI-oH-fRe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="I02-eR-4wq"/>
+                            <constraint firstItem="00w-9M-kOk" firstAttribute="top" secondItem="CmI-oH-fRe" secondAttribute="bottom" constant="40" id="Zot-ap-Y04"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="00w-9M-kOk" secondAttribute="bottom" id="fw9-z8-icb"/>
+                            <constraint firstItem="CmI-oH-fRe" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="kg6-Pk-mj7"/>
                             <constraint firstItem="00w-9M-kOk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="rMO-3K-v88"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="00w-9M-kOk" secondAttribute="trailing" id="vEq-aL-n0c"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="myProfileImageView" destination="CmI-oH-fRe" id="TeZ-IK-ZLU"/>
                         <outlet property="profileImageCollecionView" destination="00w-9M-kOk" id="K7T-5w-vCh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="4"/>
+            <point key="canvasLocation" x="139.69465648854961" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>

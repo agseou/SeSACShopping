@@ -9,7 +9,10 @@ import UIKit
 
 class ProfileImageSettingViewController: UIViewController {
 
+    @IBOutlet var myProfileImageView: UIImageView!
     @IBOutlet var profileImageCollecionView: UICollectionView!
+    
+    var userSelect: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,18 @@ class ProfileImageSettingViewController: UIViewController {
     
     func configureView(){
         self.view.backgroundColor = .black
+        
+        myProfileImageView.image = UIImage(resource: .profile10)
+        myProfileImageView.layer.borderColor = UIColor.accent.cgColor
+        myProfileImageView.layer.borderWidth = 5
+        DispatchQueue.main.async {
+            self.myProfileImageView.layer.cornerRadius
+            = self.myProfileImageView.bounds.width/2
+        }
+        
+        profileImageCollecionView.backgroundColor = .clear
+        profileImageCollecionView.dataSource = self
+        profileImageCollecionView.delegate = self
     }
     
     func registerCell(){
@@ -41,6 +56,7 @@ class ProfileImageSettingViewController: UIViewController {
 
 
 extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
     }
@@ -48,9 +64,22 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
         
-        cell.configureCell(data: "profile\(indexPath.item)")
+        cell.configureCell(data: "profile\(indexPath.item + 1)")
         
+        if userSelect == indexPath.item {
+            cell.profileImageView.layer.borderColor = UIColor.accent.cgColor
+            cell.profileImageView.layer.borderWidth = 4
+        } else {
+            cell.profileImageView.layer.borderColor = UIColor.clear.cgColor
+            cell.profileImageView.layer.borderWidth = 0
+        }
+       
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        userSelect = indexPath.row
+        collectionView.reloadData()
     }
     
     
