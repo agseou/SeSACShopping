@@ -14,12 +14,18 @@ struct SearchAPIManager {
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)"
+        let parameters: Parameters = [
+            "query": text
+        ]
         let headers: HTTPHeaders = [
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "X-Naver-Client-Id": APIKey.clientID,
             "X-Naver-Client-Secret": APIKey.clientSecret]
         
+        
         AF.request(url,
                    method: .get,
+                   parameters: parameters,
                    headers: headers).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let success):

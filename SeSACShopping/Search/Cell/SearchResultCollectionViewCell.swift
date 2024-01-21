@@ -20,19 +20,27 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
         configureView()
     }
     
     func configureView() {
         
+        itemImageView.layer.cornerRadius = 10
+        itemImageView.contentMode = .scaleToFill
+        
         heartBtn.backgroundColor = .white
-        heartBtn.setTitle(nil, for: .normal)
+        heartBtn.setTitle("", for: .normal)
         heartBtn.setImage(UIImage(systemName: "heart"), for: .normal)
         DispatchQueue.main.async {
             self.heartBtn.layer.cornerRadius
             = self.heartBtn.bounds.width/2
         }
+        
+        malNameLabel.textColor = .white
+        
+        titleLabel.textColor = .white
+        
+        priceLabel.textColor = .white
     }
     
     func configureCell(_ data: Item){

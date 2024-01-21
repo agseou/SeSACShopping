@@ -63,6 +63,13 @@ extension SearchViewController: UISearchBarDelegate {
         searchHistroyTableView.reloadData()
         searchBar.searchTextField.text = nil
         
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
+        
+        vc.text = text
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
         view.endEditing(true)
     }
     
@@ -92,6 +99,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
+        
+        vc.text = searchHistoryList[indexPath.row]
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func tapCancelBtn(_ sender: UIButton) {

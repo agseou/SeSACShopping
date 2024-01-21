@@ -10,12 +10,17 @@ import UIKit
 class SearchResultViewController: UIViewController {
 
     @IBOutlet var serachResultCollectionView: UICollectionView!
-    let searchManager = SearchAPIManager()
     var searchList: [Item] = []
+    let searchManager = SearchAPIManager()
+    var text: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        searchManager.callRequest(text: text) { list in
+            self.searchList = list
+            self.serachResultCollectionView.reloadData()
+        }
         registerCell()
         configureView()
         configureLayout()
@@ -36,8 +41,8 @@ class SearchResultViewController: UIViewController {
     
     func configureLayout(){
         let layer = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.width/4
-        layer.itemSize = CGSize(width: width, height: width)
+        let width = UIScreen.main.bounds.width/2
+        layer.itemSize = CGSize(width: width, height: width + 100)
         layer.minimumLineSpacing = 0
         layer.minimumInteritemSpacing = 0
         serachResultCollectionView.collectionViewLayout = layer

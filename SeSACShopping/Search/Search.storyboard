@@ -56,7 +56,7 @@
         <!--Search Result View Controller-->
         <scene sceneID="TSV-yp-ana">
             <objects>
-                <viewController id="nNP-TM-IzJ" customClass="SearchResultViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultViewController" id="nNP-TM-IzJ" customClass="SearchResultViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rYZ-Gb-aoa">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -102,7 +102,7 @@
         <!--Search Detail View Controller-->
         <scene sceneID="9sG-sk-E8M">
             <objects>
-                <viewController id="psc-N4-eqI" customClass="SearchDetailViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchDetailViewController" id="psc-N4-eqI" customClass="SearchDetailViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="85t-hy-c9V">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
