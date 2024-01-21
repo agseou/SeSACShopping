@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,9 +53,90 @@
             </objects>
             <point key="canvasLocation" x="1900" y="-2.1126760563380285"/>
         </scene>
+        <!--Search Result View Controller-->
+        <scene sceneID="TSV-yp-ana">
+            <objects>
+                <viewController id="nNP-TM-IzJ" customClass="SearchResultViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rYZ-Gb-aoa">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C53-e4-Lqe">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nNP-Ch-OPE">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="chU-4D-lgs">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="md5-wJ-sjx">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OfT-Og-MXi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OfT-Og-MXi" firstAttribute="bottom" secondItem="C53-e4-Lqe" secondAttribute="bottom" id="3iA-7T-WTb"/>
+                            <constraint firstItem="C53-e4-Lqe" firstAttribute="leading" secondItem="OfT-Og-MXi" secondAttribute="leading" id="axE-Ok-lmb"/>
+                            <constraint firstItem="C53-e4-Lqe" firstAttribute="top" secondItem="OfT-Og-MXi" secondAttribute="top" id="dnf-F7-7F9"/>
+                            <constraint firstItem="OfT-Og-MXi" firstAttribute="trailing" secondItem="C53-e4-Lqe" secondAttribute="trailing" id="xBb-s7-De7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="serachResultCollectionView" destination="C53-e4-Lqe" id="zID-D7-evj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bi5-ww-KUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2735" y="-2"/>
+        </scene>
+        <!--Search Detail View Controller-->
+        <scene sceneID="9sG-sk-E8M">
+            <objects>
+                <viewController id="psc-N4-eqI" customClass="SearchDetailViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="85t-hy-c9V">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtU-HW-XBT">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mqg-YX-ODC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mqg-YX-ODC" firstAttribute="trailing" secondItem="KtU-HW-XBT" secondAttribute="trailing" id="9hX-lP-0q9"/>
+                            <constraint firstItem="KtU-HW-XBT" firstAttribute="leading" secondItem="Mqg-YX-ODC" secondAttribute="leading" id="RkY-to-lq0"/>
+                            <constraint firstItem="KtU-HW-XBT" firstAttribute="top" secondItem="Mqg-YX-ODC" secondAttribute="top" id="qSx-xY-mqT"/>
+                            <constraint firstItem="Mqg-YX-ODC" firstAttribute="bottom" secondItem="KtU-HW-XBT" secondAttribute="bottom" id="tHp-cb-yRI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="KtU-HW-XBT" id="2Gf-1d-hei"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Otn-9q-1xR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3549" y="-2"/>
+        </scene>
         <!--Item-->
         <scene sceneID="pAa-L7-2Wu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEm-Sk-o4y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Fh-fq-dZH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="fuM-nJ-prP"/>
                     <toolbarItems/>
@@ -67,7 +149,6 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="jCv-FH-R5u"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eEm-Sk-o4y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>
