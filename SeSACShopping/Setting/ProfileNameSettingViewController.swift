@@ -33,7 +33,6 @@ class ProfileNameSettingViewController: UIViewController {
         
         completeBtn.addTarget(self, action: #selector(tapCompleteBtn), for: .touchUpInside)
         
-        
         configureView()
     }
     
@@ -66,10 +65,17 @@ class ProfileNameSettingViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        profileImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+    }
+    
     func configureView() {
         self.view.backgroundColor = .black
         
-        profileImageView.image = UIImage(resource: .profile1)
+        navigationItem.title = "프로필 설정"
+        
         DispatchQueue.main.async {
             self.profileImageView.layer.cornerRadius
             = self.profileImageView.bounds.width/2

@@ -18,7 +18,6 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
 
     func configureCell(data: String){
         profileImageView.image = UIImage(named: data)
-        //profileImageView.image = UIImage(resource: .profile1)
         DispatchQueue.main.async {
             self.profileImageView.layer.cornerRadius
             = self.profileImageView.bounds.width/2

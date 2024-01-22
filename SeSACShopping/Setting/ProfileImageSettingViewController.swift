@@ -12,11 +12,12 @@ class ProfileImageSettingViewController: UIViewController {
     @IBOutlet var myProfileImageView: UIImageView!
     @IBOutlet var profileImageCollecionView: UICollectionView!
     
-    var userSelect: Int = 0
+    var userSelect: Int = Int(String(UserDefaultsManager.shared.image.filter(\.isNumber)))!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(userSelect)
         registerCell()
         configureView()
         configureLayout()
@@ -24,8 +25,9 @@ class ProfileImageSettingViewController: UIViewController {
     
     func configureView(){
         self.view.backgroundColor = .black
+        navigationItem.title = "프로필 설정"
         
-        myProfileImageView.image = UIImage(resource: .profile10)
+        myProfileImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         myProfileImageView.layer.borderColor = UIColor.accent.cgColor
         myProfileImageView.layer.borderWidth = 5
         DispatchQueue.main.async {
@@ -66,9 +68,10 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
         
         cell.configureCell(data: "profile\(indexPath.item + 1)")
         
-        if userSelect == indexPath.item {
+        if userSelect == indexPath.item + 1 {
             cell.profileImageView.layer.borderColor = UIColor.accent.cgColor
             cell.profileImageView.layer.borderWidth = 4
+            myProfileImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         } else {
             cell.profileImageView.layer.borderColor = UIColor.clear.cgColor
             cell.profileImageView.layer.borderWidth = 0
@@ -78,7 +81,9 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        userSelect = indexPath.row
+        
+        userSelect = indexPath.row + 1
+        UserDefaultsManager.shared.image = "profile\(userSelect)"
         collectionView.reloadData()
     }
     

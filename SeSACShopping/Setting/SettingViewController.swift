@@ -21,7 +21,12 @@ class SettingViewController: UIViewController {
         navigationItem.searchController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         navigationItem.searchController?.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
         
+        configureView()
         configureTableView()
+    }
+    
+    func configureView() {
+        navigationItem.title = "설정"
     }
     
     func configureTableView() {
@@ -81,7 +86,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingProfileCell", for: indexPath)
             
-            cell.textLabel?.text = "떠나고 싶은 고래밥"
+            cell.textLabel?.text = "떠나고 싶은 \(UserDefaultsManager.shared.nickname)"
             cell.textLabel?.textColor = .white
             cell.textLabel?.font = .boldSystemFont(ofSize: 17)
             
@@ -91,7 +96,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.backgroundColor = .darkGray
             
-            cell.imageView?.image = UIImage(resource: .profile1)
+            cell.imageView?.image = UIImage(named: UserDefaultsManager.shared.image)
             DispatchQueue.main.async {
                 cell.imageView?.layer.cornerRadius
                 = cell.imageView!.bounds.width/2

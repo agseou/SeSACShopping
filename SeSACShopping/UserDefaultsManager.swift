@@ -21,7 +21,7 @@ class UserDefaultsManager {
     
     var nickname: String {
         get { //가져오고
-            ud.string(forKey: UDKey.nickname.rawValue) ?? "profile\(Int.random(in: 1...14))"
+            ud.string(forKey: UDKey.nickname.rawValue) ?? "User"
         }
         set { //저장하기
             ud.set(newValue ,forKey: UDKey.nickname.rawValue)
@@ -30,7 +30,7 @@ class UserDefaultsManager {
     
     var image: String {
         get { //가져오고
-            ud.string(forKey: UDKey.image.rawValue) ?? "profile1"
+            ud.string(forKey: UDKey.image.rawValue) ?? "profile\(Int.random(in: 1...14))"
         }
         set { //저장하기
             ud.set(newValue ,forKey: UDKey.image.rawValue)

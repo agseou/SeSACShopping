@@ -39,6 +39,7 @@ class SearchViewController: UIViewController {
     }
     
     func configureView() {
+        navigationItem.title = "\(UserDefaultsManager.shared.nickname)님의 새싹쇼핑"
         
         searchBar.searchBarStyle = .minimal
         
