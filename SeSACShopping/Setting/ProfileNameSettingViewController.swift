@@ -10,6 +10,7 @@ import UIKit
 class ProfileNameSettingViewController: UIViewController {
     
     enum nickNameState: String {
+        case none = "특수문자, 숫자 제외 2자이상 10자 미만으로 입력해주세요."
         case ok = "사용할 수 있는 닉네임이에요"
         case isCount = "2글자 이상 10글자 미만으로 설정해주세요"
         case isNumber = "닉네임에 숫자는 포함할 수 없어요"
@@ -45,21 +46,23 @@ class ProfileNameSettingViewController: UIViewController {
     }
     
     @objc func tapCompleteBtn() {
-        
-        UserDefaultsManager.shared.nickname = nameTextField.text!
-        
-        if UserDefaults.standard.bool(forKey: "UserState") == false {
-            UserDefaults.standard.set(true, forKey: "UserState")
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "MainTabBarContoroller") as! UITabBarController
+        if isAccess == true {
             
-            vc.modalPresentationStyle = .fullScreen
+            UserDefaultsManager.shared.nickname = nameTextField.text!
             
-            present(vc, animated: false) {
-                self.navigationController?.popViewController(animated: false)
+            if UserDefaults.standard.bool(forKey: "UserState") == false {
+                UserDefaults.standard.set(true, forKey: "UserState")
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "MainTabBarContoroller") as! UITabBarController
+                
+                vc.modalPresentationStyle = .fullScreen
+                
+                present(vc, animated: false) {
+                    self.navigationController?.popViewController(animated: false)
+                }
+            } else {
+                navigationController?.popViewController(animated: false)
             }
-        } else {
-            navigationController?.popViewController(animated: false)
         }
     }
     
@@ -85,11 +88,11 @@ class ProfileNameSettingViewController: UIViewController {
         
         dividerView.backgroundColor = .accent
         
-        noticeLabel.text = "닉네임에 @는 포함할 수 없어요"
+        noticeLabel.text = nickNameState.none.rawValue
         noticeLabel.textColor = .accent
         noticeLabel.font = .systemFont(ofSize: 13)
         
-        completeBtn.backgroundColor = .accent
+        completeBtn.backgroundColor =  .gray
         completeBtn.setTitle("완료", for: .normal)
         completeBtn.setTitleColor(.white, for: .normal)
         completeBtn.layer.cornerRadius = 10
@@ -98,12 +101,45 @@ class ProfileNameSettingViewController: UIViewController {
 }
 
 extension ProfileNameSettingViewController: UITextFieldDelegate {
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text!.count > 10 || textField.text!.count < 2 {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 새로운 텍스트를 만들어봅니다.
+        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        
+        // 길이, 특수 문자, 숫자 여부를 검사하여 noticeLabel 업데이트
+        if newText.isEmpty {
+            noticeLabel.text = nickNameState.none.rawValue
+            isAccess = false
+        }else if newText.count > 10 || newText.count < 2 {
             noticeLabel.text = nickNameState.isCount.rawValue
+            isAccess = false
+        } else if newText.containsSpecialCharacters() {
+            noticeLabel.text = nickNameState.isSpecial.rawValue
+            isAccess = false
+        } else if newText.containsNumbers() {
+            noticeLabel.text = nickNameState.isNumber.rawValue
+            isAccess = false
+        } else {
+            noticeLabel.text = nickNameState.ok.rawValue
+            isAccess = true
         }
+
+        completeBtn.backgroundColor = isAccess ? .accent : .gray
+        
+        return true
+    }
+}
+
+extension String {
+    func containsSpecialCharacters() -> Bool {
+        // 특수 문자가 포함되어 있는지 여부를 정규 표현식으로 검사
+        let regex = ".*[^A-Za-z0-9].*"
+        return self.range(of: regex, options: .regularExpression) != nil
     }
     
-   
+    func containsNumbers() -> Bool {
+        // 숫자가 포함되어 있는지 여부를 정규 표현식으로 검사
+        let regex = ".*[0-9].*"
+        return self.range(of: regex, options: .regularExpression) != nil
+    }
 }
