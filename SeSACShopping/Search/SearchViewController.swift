@@ -40,6 +40,9 @@ class SearchViewController: UIViewController {
     
     func configureView() {
         navigationItem.title = "\(UserDefaultsManager.shared.nickname)님의 새싹쇼핑"
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         searchBar.searchBarStyle = .minimal
         
@@ -56,7 +59,7 @@ class SearchViewController: UIViewController {
         searchHistroyTableView.separatorStyle = .none
         searchHistroyTableView.rowHeight = UITableView.automaticDimension
         
-        searchHistroyTableView.isScrollEnabled = searchHistoryList.isEmpty ? false : true
+        //searchHistroyTableView.isScrollEnabled = searchHistoryList.isEmpty ? false : true
         
     }
     

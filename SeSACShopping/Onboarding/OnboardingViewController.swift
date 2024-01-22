@@ -24,6 +24,9 @@ class OnboardingViewController: UIViewController {
     
     func configureView(){
         self.view.backgroundColor = .black
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         logoImageView.image = UIImage(resource: .sesacShopping)
         subImageView.image = UIImage(resource: .onboarding)

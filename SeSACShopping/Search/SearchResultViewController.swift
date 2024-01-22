@@ -30,6 +30,9 @@ class SearchResultViewController: UIViewController {
         self.view.backgroundColor = .black
         
         navigationItem.title = text
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         serachResultCollectionView.backgroundColor = .clear
         serachResultCollectionView.dataSource = self

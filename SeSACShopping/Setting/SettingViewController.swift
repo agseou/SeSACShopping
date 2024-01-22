@@ -27,6 +27,9 @@ class SettingViewController: UIViewController {
     
     func configureView() {
         navigationItem.title = "설정"
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     func configureTableView() {
@@ -34,8 +37,6 @@ class SettingViewController: UIViewController {
         settingTableView.dataSource = self
         
         settingTableView.backgroundColor = .clear
-        
-        
     }
     
 }
@@ -82,6 +83,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == IndexPath(row: 0, section: 0) {
+            return 80
+        }
+        return 44
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingProfileCell", for: indexPath)
@@ -92,7 +100,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.detailTextLabel?.text = "8개의 상품을 좋아하고 있어요"
             cell.detailTextLabel?.textColor = .white
-            cell.detailTextLabel?.font = .boldSystemFont(ofSize: 15)
+            cell.detailTextLabel?.font = .boldSystemFont(ofSize: 13)
             
             cell.backgroundColor = .darkGray
             
@@ -101,6 +109,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.imageView?.layer.cornerRadius
                 = cell.imageView!.bounds.width/2
             }
+            cell.imageView?.layer.borderColor = UIColor.accent.cgColor
+            cell.imageView?.layer.borderWidth = 3
+            
+            tableView.reloadRows(at: [indexPath], with: .fade)
             
             return cell
         } else {
@@ -109,6 +121,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = .darkGray
             cell.textLabel?.text = list[indexPath.row]
             cell.textLabel?.textColor = .white
+            tableView.reloadRows(at: [indexPath], with: .fade)
             
             return cell
         }

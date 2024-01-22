@@ -52,7 +52,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         malNameLabel.text = data.mallName
         titleLabel.text = data.title
-        priceLabel.text = data.lprice
+        priceLabel.text = data.lprice.formattedNumber()
     }
 
 }
