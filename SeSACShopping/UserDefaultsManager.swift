@@ -37,12 +37,12 @@ class UserDefaultsManager {
         }
     }
     
-    var searchList: String {
+    var searchList: [String]? {
         get { //가져오고
-            ud.string(forKey: UDKey.nickname.rawValue) ?? "profile\(Int.random(in: 1...14))"
+            ud.array(forKey: UDKey.searchList.rawValue) as? [String]
         }
         set { //저장하기
-            ud.set(newValue ,forKey: UDKey.nickname.rawValue)
+            ud.set(newValue ,forKey: UDKey.searchList.rawValue)
         }
     }
 }

@@ -16,7 +16,6 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchHistoryBar: UIView!
     
     var searchHistoryList: [String] = []
-    //var searchList = UserDefaults.standard.array(forKey: "searchList")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +80,7 @@ extension SearchViewController: UISearchBarDelegate {
         
         searchHistroyTableView.isScrollEnabled = true
         searchHistoryList.insert(text, at: 0)
+        UserDefaultsManager.shared.searchList = searchHistoryList
         searchHistroyTableView.reloadData()
         searchBar.searchTextField.text = nil
         
@@ -88,9 +88,8 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = text
-        
+        print(UserDefaultsManager.shared.searchList!)
         navigationController?.pushViewController(vc, animated: true)
-        updateHeaderVisibility()
         view.endEditing(true)
     }
     
@@ -135,6 +134,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func tapCancelBtn(_ sender: UIButton) {
         print("tap")
         searchHistoryList.remove(at: sender.tag)
+        UserDefaultsManager.shared.searchList = searchHistoryList
+        print(UserDefaultsManager.shared.searchList!)
         searchHistroyTableView.reloadData()
     }
     

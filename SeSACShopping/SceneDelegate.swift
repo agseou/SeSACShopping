@@ -16,7 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //UserState: 사용자의 첫 화면 결정하기 위해 필요한 요소
         //false라면 사용자가 처음 들어왔을것이고, 첫진입이후에는 true로 바꿔주자
-        UserDefaults.standard.setValue(false, forKey: "UserState")
         let value = UserDefaults.standard.bool(forKey: "UserState")
         
         if value == false {
