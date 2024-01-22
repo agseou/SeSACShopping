@@ -62,10 +62,13 @@ class ProfileNameSettingViewController: UIViewController {
         
         nameTextField.placeholder = "닉네임을 입력해주세요"
         nameTextField.backgroundColor = .clear
+        nameTextField.borderStyle = .none
         
         dividerView.backgroundColor = .accent
         
         noticeLabel.text = "닉네임에 @는 포함할 수 없어요"
+        noticeLabel.textColor = .accent
+        noticeLabel.font = .systemFont(ofSize: 13)
         
         completeBtn.backgroundColor = .accent
         completeBtn.setTitle("완료", for: .normal)

@@ -14,6 +14,7 @@ class UserDefaultsManager {
     enum UDKey: String {
         case nickname
         case image
+        case searchList
     }
     
     let ud = UserDefaults.standard
@@ -33,6 +34,15 @@ class UserDefaultsManager {
         }
         set { //저장하기
             ud.set(newValue ,forKey: UDKey.image.rawValue)
+        }
+    }
+    
+    var searchList: String {
+        get { //가져오고
+            ud.string(forKey: UDKey.nickname.rawValue) ?? "profile\(Int.random(in: 1...14))"
+        }
+        set { //저장하기
+            ud.set(newValue ,forKey: UDKey.nickname.rawValue)
         }
     }
 }

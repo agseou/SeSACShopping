@@ -29,6 +29,8 @@ class SearchResultViewController: UIViewController {
     func configureView(){
         self.view.backgroundColor = .black
         
+        navigationItem.title = text
+        
         serachResultCollectionView.backgroundColor = .clear
         serachResultCollectionView.dataSource = self
         serachResultCollectionView.delegate = self
@@ -65,5 +67,13 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SearchDetailViewController.identifier) as! SearchDetailViewController
+        
+        vc.urlString = searchList[indexPath.item].link
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

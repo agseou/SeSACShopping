@@ -36,9 +36,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             = self.heartBtn.bounds.width/2
         }
         
-        malNameLabel.textColor = .white
+        malNameLabel.textColor = .lightGray
+        malNameLabel.font = .systemFont(ofSize: 13, weight: .light)
         
         titleLabel.textColor = .white
+        titleLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        titleLabel.numberOfLines = 2
         
         priceLabel.textColor = .white
     }

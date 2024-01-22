@@ -459,6 +459,7 @@
 				DEVELOPMENT_TEAM = 47VP7M3T34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "은서우";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Search;
@@ -492,6 +493,7 @@
 				DEVELOPMENT_TEAM = 47VP7M3T34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "은서우";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Search;

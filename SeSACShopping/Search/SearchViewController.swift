@@ -11,8 +11,12 @@ class SearchViewController: UIViewController {
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchHistroyTableView: UITableView!
+    @IBOutlet var allDeleteBtn: UIButton!
+    @IBOutlet var resentLabel: UILabel!
+    @IBOutlet var searchHistoryBar: UIView!
     
     var searchHistoryList: [String] = []
+    //var searchList = UserDefaults.standard.array(forKey: "searchList")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +25,30 @@ class SearchViewController: UIViewController {
         navigationItem.searchController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         navigationItem.searchController?.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
 
+        allDeleteBtn.addTarget(self, action: #selector(tapAllDeleteBtn), for: .touchUpInside)
+        
+        
         registerCell()
-        configureTableView()
-        searchBar.searchBarStyle = .minimal
+        configureView()
+       
         
     }
     
-    func configureTableView() {
+    @objc func tapAllDeleteBtn(){
+        searchHistoryList.removeAll()
+        searchHistroyTableView.reloadData()
+    }
+    
+    func configureView() {
+        
+        searchBar.searchBarStyle = .minimal
+        
+        resentLabel.text = "최근 검색"
+        resentLabel.textColor = .white
+        
+        allDeleteBtn.setTitle("모두 지우기", for: .normal)
+        allDeleteBtn.setTitleColor(.accent, for: .normal)
+        
         searchHistroyTableView.delegate = self
         searchHistroyTableView.dataSource = self
         
@@ -69,7 +90,7 @@ extension SearchViewController: UISearchBarDelegate {
         vc.text = text
         
         navigationController?.pushViewController(vc, animated: true)
-        
+        updateHeaderVisibility()
         view.endEditing(true)
     }
     
@@ -93,6 +114,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SearchHistoryTableViewCell.identifier, for: indexPath) as! SearchHistoryTableViewCell
             
             cell.configure(data: searchHistoryList[indexPath.row])
+            cell.cancelBtn.tag = indexPath.row
             cell.cancelBtn.addTarget(self, action: #selector(tapCancelBtn), for: .touchUpInside)
             
             return cell
@@ -112,9 +134,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func tapCancelBtn(_ sender: UIButton) {
         print("tap")
-        
-        //searchHistoryList.remove(at: indexPath.row)
-        //searchHistroyTableView.reloadData()
+        searchHistoryList.remove(at: sender.tag)
+        searchHistroyTableView.reloadData()
     }
     
 }
