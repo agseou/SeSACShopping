@@ -16,7 +16,7 @@ struct SearchAPIManager {
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=1&sort=\(sort)"
         
         let parameters: Parameters = [
-            "query": text
+            "query": query
         ]
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",

@@ -19,9 +19,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.searchController?.tabBarItem.title =  "검색"
-        navigationItem.searchController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        navigationItem.searchController?.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
+        let item = UITabBarItem(title: "검색",
+                                image: UIImage(systemName: "magnifyingglass"),
+                                selectedImage: UIImage(systemName: "magnifyingglass"))
+        
+        navigationController?.tabBarItem = item
 
         allDeleteBtn.addTarget(self, action: #selector(tapAllDeleteBtn), for: .touchUpInside)
         

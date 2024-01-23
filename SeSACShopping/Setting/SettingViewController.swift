@@ -16,10 +16,11 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let item = UITabBarItem(title: "설정",
+                                image: UIImage(systemName: "person"),
+                                selectedImage: UIImage(systemName: "person.fill"))
         
-        navigationItem.searchController?.tabBarItem.title =  "검색"
-        navigationItem.searchController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        navigationItem.searchController?.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
+        navigationController?.tabBarItem = item
         
         configureView()
         configureTableView()
