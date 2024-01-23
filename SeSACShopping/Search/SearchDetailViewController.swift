@@ -11,10 +11,14 @@ import WebKit
 class SearchDetailViewController: UIViewController {
     
     @IBOutlet var webView: WKWebView!
-    var urlString: String!
-    
+    var id: String!
+    var navTitle: String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = navTitle
+   
+        let urlString = "https://msearch.shopping.naver.com/product/\(id ?? "")"
         
         if let url = URL(string: urlString) {
             

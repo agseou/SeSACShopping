@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 struct SearchAPIManager {
-    func callRequest(text: String, start: Int, sort: String ,completionHandler: @escaping ([Item]) -> Void){
+    func callRequest(text: String, start: Int, sort: String ,completionHandler: @escaping (Shopping) -> Void){
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
@@ -32,7 +32,7 @@ struct SearchAPIManager {
             case .success(let success):
                 dump(success)
                 
-                completionHandler(success.items)
+                completionHandler(success)
                 
             case .failure(let failure):
                 print(failure)

@@ -8,19 +8,32 @@
 import UIKit
 
 class SearchResultViewController: UIViewController {
+    
+    enum sortType: String, CaseIterable {
+        case sim
+        case date
+        case acs
+        case dsc
+    }
 
     @IBOutlet var serachResultCollectionView: UICollectionView!
-    var searchList: [Item] = []
+    var searchList: [Item] = [] {
+        didSet { //변경된 직후 -> 프로퍼티 옵저버.
+            serachResultCollectionView.reloadData()
+        }
+    }
     let searchManager = SearchAPIManager()
     var text: String = ""
     var start: Int = 1
+    var countItems: String = "0"
+    @IBOutlet var totalSearchNumLabel: UILabel!
+    @IBOutlet var sortBtns: [UIButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchManager.callRequest(text: text, start: start, sort: "sim") { list in
-            self.searchList = list
-            self.serachResultCollectionView.reloadData()
+        searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
+            self.countItems = String(shopping.total).formattedNumber()!
         }
         registerCell()
         configureView()
@@ -38,6 +51,25 @@ class SearchResultViewController: UIViewController {
         serachResultCollectionView.backgroundColor = .clear
         serachResultCollectionView.dataSource = self
         serachResultCollectionView.delegate = self
+        
+        totalSearchNumLabel.text = "\(countItems) 개의 검색결과"
+        totalSearchNumLabel.textColor = .accent
+        totalSearchNumLabel.font = .systemFont(ofSize: 16)
+        
+        sortBtnStyle(btn: sortBtns[0], text: "정확도")
+        sortBtnStyle(btn: sortBtns[1], text: "날짜순")
+        sortBtnStyle(btn: sortBtns[2], text: "가격높은순")
+        sortBtnStyle(btn: sortBtns[3], text: "가격낮은순")
+    }
+    
+    func sortBtnStyle(btn: UIButton, text: String) {
+        btn.setTitle(text, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16)
+        btn.setTitleColor(.white, for: .normal)
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.cornerRadius = 8
+        btn.contentEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     func registerCell(){
@@ -48,7 +80,8 @@ class SearchResultViewController: UIViewController {
     func configureLayout(){
         let layer = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width/2
-        layer.itemSize = CGSize(width: width, height: width + 100)
+        let height = UIScreen.main.bounds.height/3
+        layer.itemSize = CGSize(width: width, height: height)
         layer.minimumLineSpacing = 0
         layer.minimumInteritemSpacing = 0
         serachResultCollectionView.collectionViewLayout = layer
@@ -71,11 +104,13 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tap")
         let sb = UIStoryboard(name: "Search", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: SearchDetailViewController.identifier) as! SearchDetailViewController
         
-        vc.urlString = searchList[indexPath.item].link
+        vc.id = searchList[indexPath.item].productID
+        vc.navTitle = searchList[indexPath.item].title
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -88,16 +123,15 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
             if searchList.count - 6 == item.item {
-                start += 20 * 2
-                searchManager.callRequest(text: text, start: start, sort: "sim") { list in
+                start += 20
+                searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
                     if self.start == 1 {
-                        self.searchList = list
+                        self.searchList = shopping.items
                     } else {
-                        self.searchList.append(contentsOf: list)
+                        self.searchList.append(contentsOf: shopping.items)
                     }
                     
-                    self.start = list.endIndex
-                    collectionView.reloadData()
+                    self.start = shopping.items.endIndex
                 }
             }
         }
