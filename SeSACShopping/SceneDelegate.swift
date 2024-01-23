@@ -56,6 +56,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         func sceneDidBecomeActive(_ scene: UIScene) {
             // Called when the scene has moved from an inactive state to an active state.
             // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         }
         
         func sceneWillResignActive(_ scene: UIScene) {
@@ -72,6 +74,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // Called as the scene transitions from the foreground to the background.
             // Use this method to save data, release shared resources, and store enough scene-specific state information
             // to restore the scene back to its current state.
+            
+            // 1. 알림에 들어갈 컨텐츠
+            let content = UNMutableNotificationContent()
+            content.title = "SeSAC Shopping을 잊으셨나요!"
+            content.body = "새로운 상품을 구경하세요!!!"
+            content.badge = 1
+            
+            // 2. 컨텐츠를 언제 보낼지 트리거를 만들어줘요
+            // 트리거는 로케이션, 타임인터벌, 캘린더 이 기준으로 만들 수 있어용
+            var component = DateComponents()
+            component.hour = 13
+            component.minute = 30
+            
+            let calendatTrigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
+            
+            // 3. 요청
+            let requset = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: calendatTrigger)
+            
+            // 4. iOS System에 등록
+            // 힌군데에서 받아...???
+            UNUserNotificationCenter.current().add(requset)
         }
         
         
