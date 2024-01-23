@@ -15,6 +15,7 @@ class UserDefaultsManager {
         case nickname
         case image
         case searchList
+        case likes
     }
     
     let ud = UserDefaults.standard
@@ -43,6 +44,15 @@ class UserDefaultsManager {
         }
         set { //저장하기
             ud.set(newValue ,forKey: UDKey.searchList.rawValue)
+        }
+    }
+    
+    var likes: [String]? {
+        get { //가져오고
+            ud.array(forKey: UDKey.likes.rawValue) as? [String]
+        }
+        set { //저장하기
+            ud.set(newValue ,forKey: UDKey.likes.rawValue)
         }
     }
 }

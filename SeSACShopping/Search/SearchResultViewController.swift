@@ -12,7 +12,7 @@ class SearchResultViewController: UIViewController {
     enum sortType: String, CaseIterable {
         case sim
         case date
-        case acs
+        case asc
         case dsc
     }
 
@@ -25,7 +25,8 @@ class SearchResultViewController: UIViewController {
     let searchManager = SearchAPIManager()
     var text: String = ""
     var start: Int = 1
-    var countItems: String = "0"
+    var countItems: String!
+    var selectType: sortType = .sim
     @IBOutlet var totalSearchNumLabel: UILabel!
     @IBOutlet var sortBtns: [UIButton]!
     
@@ -33,12 +34,13 @@ class SearchResultViewController: UIViewController {
         super.viewDidLoad()
         
         searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
-            self.countItems = String(shopping.total).formattedNumber()!
+            self.searchList = shopping.items
         }
         registerCell()
         configureView()
         configureLayout()
     }
+    
     
     func configureView(){
         self.view.backgroundColor = .black
@@ -52,14 +54,17 @@ class SearchResultViewController: UIViewController {
         serachResultCollectionView.dataSource = self
         serachResultCollectionView.delegate = self
         
-        totalSearchNumLabel.text = "\(countItems) 개의 검색결과"
         totalSearchNumLabel.textColor = .accent
         totalSearchNumLabel.font = .systemFont(ofSize: 16)
         
         sortBtnStyle(btn: sortBtns[0], text: "정확도")
+        sortBtns[0].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
         sortBtnStyle(btn: sortBtns[1], text: "날짜순")
+        sortBtns[1].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
         sortBtnStyle(btn: sortBtns[2], text: "가격높은순")
+        sortBtns[2].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
         sortBtnStyle(btn: sortBtns[3], text: "가격낮은순")
+        sortBtns[3].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
     }
     
     func sortBtnStyle(btn: UIButton, text: String) {
@@ -70,6 +75,27 @@ class SearchResultViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.cgColor
         btn.layer.cornerRadius = 8
         btn.contentEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
+    }
+    
+    @objc func changeSortType(_ sender: UIButton){
+        if sender.titleLabel?.text == "정확도" {
+            searchManager.callRequest(text: text, start: 1, sort: "sim") { Shopping in
+                self.searchList = Shopping.items
+            }
+        } else if sender.titleLabel?.text == "날짜순" {
+            searchManager.callRequest(text: text, start: 1, sort: "date") { Shopping in
+                self.searchList = Shopping.items
+            }
+        } else if sender.titleLabel?.text == "가격높은순" {
+            searchManager.callRequest(text: text, start: 1, sort: "dsc") { Shopping in
+                self.searchList = Shopping.items
+            }
+        } else if sender.titleLabel?.text == "가격낮은순" {
+            searchManager.callRequest(text: text, start: 1, sort: "asc") { Shopping in
+                self.searchList = Shopping.items
+            }
+        }
+        print(sender.titleLabel?.text)
     }
     
     func registerCell(){

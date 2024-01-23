@@ -8,7 +8,42 @@
 import Foundation
 import Alamofire
 
-struct SearchAPIManager {
+class SearchAPIManager {
+    
+    
+    let headers: HTTPHeaders = [
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Naver-Client-Id": APIKey.clientID,
+        "X-Naver-Client-Secret": APIKey.clientSecret]
+    
+    
+    func callRequest(text: String, sort: String ,completionHandler: @escaping (Shopping) -> Void){
+        
+        let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=1&sort=\(sort)"
+        
+        let parameters: Parameters = [
+            "query": query
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   parameters: parameters,
+                   headers: headers).responseDecodable(of: Shopping.self) { response in
+            switch response.result {
+            case .success(let success):
+                //dump(success)
+                
+                completionHandler(success)
+                
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+        
+    }
+    
     func callRequest(text: String, start: Int, sort: String ,completionHandler: @escaping (Shopping) -> Void){
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -18,19 +53,14 @@ struct SearchAPIManager {
         let parameters: Parameters = [
             "query": query
         ]
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "X-Naver-Client-Id": APIKey.clientID,
-            "X-Naver-Client-Secret": APIKey.clientSecret]
-        
-        
+       
         AF.request(url,
                    method: .get,
                    parameters: parameters,
                    headers: headers).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let success):
-                dump(success)
+                //dump(success)
                 
                 completionHandler(success)
                 

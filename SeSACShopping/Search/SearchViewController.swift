@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchHistroyTableView: UITableView!
     @IBOutlet var allDeleteBtn: UIButton!
     @IBOutlet var resentLabel: UILabel!
+    let searchManager = SearchAPIManager()
     
     var searchHistoryList: [String] = []
     
@@ -97,6 +98,9 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = text
+        searchManager.callRequest(text: text, sort: "sim") { Shopping in
+            vc.totalSearchNumLabel.text =  "\(String(Shopping.total).formattedNumber()!) 개의 검색결과"
+        }
         
         resentLabel.isHidden = false
         allDeleteBtn.isHidden = false
