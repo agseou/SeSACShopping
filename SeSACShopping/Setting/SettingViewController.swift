@@ -102,8 +102,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.detailTextLabel?.textColor = .white
             cell.detailTextLabel?.font = .boldSystemFont(ofSize: 13)
             
-            cell.backgroundColor = .darkGray
-            
             cell.imageView?.image = UIImage(named: UserDefaultsManager.shared.image)
             DispatchQueue.main.async {
                 cell.imageView?.layer.cornerRadius
@@ -118,7 +116,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingDetailCell", for: indexPath)
             
-            cell.backgroundColor = .darkGray
             cell.textLabel?.text = list[indexPath.row]
             cell.textLabel?.textColor = .white
             tableView.reloadRows(at: [indexPath], with: .fade)

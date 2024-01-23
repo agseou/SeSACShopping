@@ -59,7 +59,7 @@ class SearchViewController: UIViewController {
         searchHistroyTableView.separatorStyle = .none
         searchHistroyTableView.rowHeight = UITableView.automaticDimension
         
-        //searchHistroyTableView.isScrollEnabled = searchHistoryList.isEmpty ? false : true
+        searchHistroyTableView.isScrollEnabled = searchHistoryList.isEmpty ? false : true
         
     }
     
@@ -127,6 +127,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searchHistoryList.isEmpty { return }
+        
         let sb = UIStoryboard(name: "Search", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         

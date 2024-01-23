@@ -13,11 +13,12 @@ class SearchResultViewController: UIViewController {
     var searchList: [Item] = []
     let searchManager = SearchAPIManager()
     var text: String = ""
+    var start: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchManager.callRequest(text: text) { list in
+        searchManager.callRequest(text: text, start: start, sort: "sim") { list in
             self.searchList = list
             self.serachResultCollectionView.reloadData()
         }
@@ -79,4 +80,32 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         navigationController?.pushViewController(vc, animated: true)
     }
 
+        
+}
+
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for item in indexPaths {
+            if searchList.count - 6 == item.item {
+                start += 20 * 2
+                searchManager.callRequest(text: text, start: start, sort: "sim") { list in
+                    if self.start == 1 {
+                        self.searchList = list
+                    } else {
+                        self.searchList.append(contentsOf: list)
+                    }
+                    
+                    self.start = list.endIndex
+                    collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        print("cancelPrefetch \(indexPaths)")
+    }
+    
+    
 }

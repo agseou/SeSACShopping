@@ -9,11 +9,12 @@ import Foundation
 import Alamofire
 
 struct SearchAPIManager {
-    func callRequest(text: String, completionHandler: @escaping ([Item]) -> Void){
+    func callRequest(text: String, start: Int, sort: String ,completionHandler: @escaping ([Item]) -> Void){
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=1&sort=\(sort)"
+        
         let parameters: Parameters = [
             "query": text
         ]
@@ -30,7 +31,9 @@ struct SearchAPIManager {
             switch response.result {
             case .success(let success):
                 dump(success)
+                
                 completionHandler(success.items)
+                
             case .failure(let failure):
                 print(failure)
             }
