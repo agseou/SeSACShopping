@@ -74,7 +74,6 @@
                         <outlet property="allDeleteBtn" destination="r2C-N9-UZK" id="96p-yE-pVV"/>
                         <outlet property="resentLabel" destination="fKd-XO-Qlm" id="DCj-tz-jyM"/>
                         <outlet property="searchBar" destination="8Ci-uf-QJ5" id="g04-P0-AYv"/>
-                        <outlet property="searchHistoryBar" destination="QZz-Zq-5SE" id="KTs-ca-5kV"/>
                         <outlet property="searchHistroyTableView" destination="8TC-17-qJV" id="Ueu-RT-VEQ"/>
                     </connections>
                 </viewController>

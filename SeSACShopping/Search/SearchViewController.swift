@@ -13,7 +13,6 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchHistroyTableView: UITableView!
     @IBOutlet var allDeleteBtn: UIButton!
     @IBOutlet var resentLabel: UILabel!
-    @IBOutlet var searchHistoryBar: UIView!
     
     var searchHistoryList: [String] = []
     
@@ -35,6 +34,8 @@ class SearchViewController: UIViewController {
     
     @objc func tapAllDeleteBtn(){
         searchHistoryList.removeAll()
+        resentLabel.isHidden = true
+        allDeleteBtn.isHidden = true
         searchHistroyTableView.reloadData()
     }
     
@@ -48,9 +49,11 @@ class SearchViewController: UIViewController {
         
         resentLabel.text = "최근 검색"
         resentLabel.textColor = .white
+        resentLabel.isHidden = searchHistoryList.isEmpty ? true : false
         
         allDeleteBtn.setTitle("모두 지우기", for: .normal)
         allDeleteBtn.setTitleColor(.accent, for: .normal)
+        allDeleteBtn.isHidden = searchHistoryList.isEmpty ? true : false
         
         searchHistroyTableView.delegate = self
         searchHistroyTableView.dataSource = self
@@ -92,6 +95,10 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = text
+        
+        resentLabel.isHidden = false
+        allDeleteBtn.isHidden = false
+        
         print(UserDefaultsManager.shared.searchList!)
         navigationController?.pushViewController(vc, animated: true)
         view.endEditing(true)
