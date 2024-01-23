@@ -95,7 +95,6 @@ class SearchResultViewController: UIViewController {
                 self.searchList = Shopping.items
             }
         }
-        print(sender.titleLabel?.text)
     }
     
     func registerCell(){
