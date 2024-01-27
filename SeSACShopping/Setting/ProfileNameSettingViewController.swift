@@ -101,6 +101,9 @@ class ProfileNameSettingViewController: UIViewController {
         nameTextField.backgroundColor = .clear
         nameTextField.borderStyle = .none
         nameTextField.delegate = self
+        if UserDefaultsManager.shared.nickname != "" {
+            nameTextField.text = UserDefaultsManager.shared.nickname
+        }
         
         dividerView.backgroundColor = .accent
         
@@ -149,7 +152,7 @@ extension ProfileNameSettingViewController: UITextFieldDelegate {
 extension String {
     func containsSpecialCharacters() -> Bool {
         // 특수 문자가 포함되어 있는지 여부를 정규 표현식으로 검사
-        let regex = ".*[^A-Za-z0-9].*"
+        let regex = ".*[$#%@]"
         return self.range(of: regex, options: .regularExpression) != nil
     }
     

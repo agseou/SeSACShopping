@@ -26,6 +26,12 @@ class SettingViewController: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        settingTableView.reloadData()
+    }
+    
     func configureView() {
         navigationItem.title = "설정"
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -55,6 +61,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 4 {
             showAlert(title: "처음부터 시작하기", message: "데이터를 모두 초기화하시겠습니까?", buttonTitle: "확인") {
                 UserDefaults.standard.set(false, forKey: "UserState")
+                UserDefaultsManager.shared.nickname = ""
+                UserDefaultsManager.shared.likes = []
+                UserDefaultsManager.shared.searchList = []
                 self.dismiss(animated: false)
             }
         }

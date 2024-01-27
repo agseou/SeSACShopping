@@ -189,7 +189,8 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if searchList.count - 6 == item.item {
+            if searchList.count - 6 <= item.item
+            {
                 start += 20
                 searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
                     if self.start == 1 {
@@ -197,7 +198,6 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                     } else {
                         self.searchList.append(contentsOf: shopping.items)
                     }
-                    
                     self.start = shopping.items.endIndex
                 }
             }
