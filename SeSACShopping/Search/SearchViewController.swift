@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tapGesture.cancelsTouchesInView = false
         let item = UITabBarItem(title: "검색",
                                 image: UIImage(systemName: "magnifyingglass"),
                                 selectedImage: UIImage(systemName: "magnifyingglass"))
@@ -42,7 +42,6 @@ class SearchViewController: UIViewController {
         
         registerCell()
         configureView()
-       
         
     }
     
@@ -103,7 +102,13 @@ extension SearchViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
         searchHistroyTableView.isScrollEnabled = true
-        searchHistoryList.insert(text, at: 0)
+        
+        if let index = searchHistoryList.firstIndex(of: text) {
+            searchHistoryList.remove(at: index)
+            searchHistoryList.insert(text, at: 0)
+        } else {
+            searchHistoryList.insert(text, at: 0)
+        }
         searchBar.searchTextField.text = nil
         
         let sb = UIStoryboard(name: "Search", bundle: nil)
