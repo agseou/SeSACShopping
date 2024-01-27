@@ -49,9 +49,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     func configureCell(_ data: Item){
         let url = URL(string: data.image)
         itemImageView.kf.setImage(with: url)
-        
+        let newTitle = data.title.replacingOccurrences(of: "<b>", with: " ")
+            .replacingOccurrences(of: "</b>", with: " ")
         malNameLabel.text = data.mallName
-        titleLabel.text = data.title
+        titleLabel.text = newTitle
         priceLabel.text = data.lprice.formattedNumber()
     }
 
