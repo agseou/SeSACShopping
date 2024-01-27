@@ -47,9 +47,9 @@ class UserDefaultsManager {
         }
     }
     
-    var likes: [Item]? {
+    var likes: [Int]? {
         get { //가져오고
-            ud.array(forKey: UDKey.likes.rawValue) as? [Item]
+            ud.array(forKey: UDKey.likes.rawValue) as? [Int]
         }
         set { //저장하기
             ud.set(newValue ,forKey: UDKey.likes.rawValue)

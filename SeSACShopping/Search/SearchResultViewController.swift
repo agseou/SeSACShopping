@@ -29,10 +29,16 @@ class SearchResultViewController: UIViewController {
     var selectType: sortType = .sim
     @IBOutlet var totalSearchNumLabel: UILabel!
     @IBOutlet var sortBtns: [UIButton]!
+    var templikeList: [Int] = [] {
+        didSet { //변경된 직후 -> 프로퍼티 옵저버.
+            serachResultCollectionView.reloadData()
+        }
+    }
+    var likeList = UserDefaultsManager.shared.likes
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        templikeList = likeList ?? []
         searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
             self.searchList = shopping.items
         }
@@ -141,7 +147,18 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         
+        
+        cell.heartBtn.tag = Int(searchList[indexPath.item].productID)!
+        cell.heartBtn.addTarget(self, action: #selector(tapHeartBtn), for: .touchUpInside)
+        
+        
+        let productID = Int(searchList[indexPath.item].productID)
+        let containsProductID = templikeList.contains(productID!)
+        
         cell.configureCell(searchList[indexPath.item])
+        if  containsProductID == true {
+            cell.heartBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
         
         return cell
     }
@@ -157,6 +174,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    @objc func tapHeartBtn(_ sender: UIButton) {
+        if let index = templikeList.firstIndex(of: sender.tag) {
+            templikeList.remove(at: index)
+            } else {
+            templikeList.append(sender.tag)
+        }
+        UserDefaultsManager.shared.likes = templikeList
+    }
         
 }
 
@@ -182,6 +207,5 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         print("cancelPrefetch \(indexPaths)")
     }
-    
     
 }

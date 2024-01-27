@@ -170,7 +170,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func tapCancelBtn(_ sender: UIButton) {
-        print("tap")
         searchHistoryList.remove(at: sender.tag)
         print(UserDefaultsManager.shared.searchList!)
     }

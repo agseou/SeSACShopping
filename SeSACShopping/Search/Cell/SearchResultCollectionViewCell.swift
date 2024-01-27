@@ -15,7 +15,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet var malNameLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    
+    var isLiked: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +30,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         heartBtn.backgroundColor = .white
         heartBtn.setTitle("", for: .normal)
-        heartBtn.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartBtn.setImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartBtn.tintColor = .black
         DispatchQueue.main.async {
             self.heartBtn.layer.cornerRadius
