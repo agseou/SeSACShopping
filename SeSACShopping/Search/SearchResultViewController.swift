@@ -57,21 +57,22 @@ class SearchResultViewController: UIViewController {
         totalSearchNumLabel.textColor = .accent
         totalSearchNumLabel.font = .systemFont(ofSize: 16)
         
-        sortBtnStyle(btn: sortBtns[0], text: "정확도")
+        sortBtnStyle(btn: sortBtns[0], text: "정확도", isSelected: true)
         sortBtns[0].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
-        sortBtnStyle(btn: sortBtns[1], text: "날짜순")
+        sortBtnStyle(btn: sortBtns[1], text: "날짜순", isSelected: false)
         sortBtns[1].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
-        sortBtnStyle(btn: sortBtns[2], text: "가격높은순")
+        sortBtnStyle(btn: sortBtns[2], text: "가격높은순", isSelected: false)
         sortBtns[2].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
-        sortBtnStyle(btn: sortBtns[3], text: "가격낮은순")
+        sortBtnStyle(btn: sortBtns[3], text: "가격낮은순", isSelected: false)
         sortBtns[3].addTarget(self, action: #selector(changeSortType(_:)), for: .touchUpInside)
     }
     
-    func sortBtnStyle(btn: UIButton, text: String) {
+    func sortBtnStyle(btn: UIButton, text: String, isSelected: Bool) {
         btn.setTitle(text, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 16)
-        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(isSelected ? .black : .white, for: .normal)
         btn.layer.borderWidth = 1
+        btn.backgroundColor = isSelected ? .white : .black
         btn.layer.borderColor = UIColor.white.cgColor
         btn.layer.cornerRadius = 8
         btn.contentEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
@@ -81,18 +82,34 @@ class SearchResultViewController: UIViewController {
         if sender.titleLabel?.text == "정확도" {
             searchManager.callRequest(text: text, start: 1, sort: "sim") { Shopping in
                 self.searchList = Shopping.items
+                self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: true)
+                self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
             }
         } else if sender.titleLabel?.text == "날짜순" {
             searchManager.callRequest(text: text, start: 1, sort: "date") { Shopping in
                 self.searchList = Shopping.items
+                self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: true)
+                self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
             }
         } else if sender.titleLabel?.text == "가격높은순" {
             searchManager.callRequest(text: text, start: 1, sort: "dsc") { Shopping in
                 self.searchList = Shopping.items
+                self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: true)
+                self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
             }
         } else if sender.titleLabel?.text == "가격낮은순" {
             searchManager.callRequest(text: text, start: 1, sort: "asc") { Shopping in
                 self.searchList = Shopping.items
+                self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
+                self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: true)
             }
         }
     }

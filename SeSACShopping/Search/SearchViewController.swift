@@ -163,7 +163,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = searchHistoryList[indexPath.row]
-        
+        searchManager.callRequest(text: searchHistoryList[indexPath.row], sort: "sim") { Shopping in
+            vc.totalSearchNumLabel.text =  "\(String(Shopping.total).formattedNumber()!) 개의 검색결과"
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
