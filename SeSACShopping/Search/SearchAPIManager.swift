@@ -48,7 +48,7 @@ class SearchAPIManager {
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=1&sort=\(sort)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=\(start)&sort=\(sort)"
         
         let parameters: Parameters = [
             "query": query
@@ -60,10 +60,11 @@ class SearchAPIManager {
                    headers: headers).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let success):
-                //dump(success)
-                
-                completionHandler(success)
-                
+                if start == 1 {
+                    completionHandler(success)
+                } else {
+                    completionHandler(success)
+                }
             case .failure(let failure):
                 print(failure)
             }

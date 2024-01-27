@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SearchResultViewController: UIViewController {
     
@@ -39,9 +40,7 @@ class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         templikeList = likeList ?? []
-        searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
-            self.searchList = shopping.items
-        }
+        callRequest(text: text, start: start, sort: "sim")
         registerCell()
         configureView()
         configureLayout()
@@ -59,6 +58,7 @@ class SearchResultViewController: UIViewController {
         serachResultCollectionView.backgroundColor = .clear
         serachResultCollectionView.dataSource = self
         serachResultCollectionView.delegate = self
+        serachResultCollectionView.prefetchDataSource = self
         
         totalSearchNumLabel.textColor = .accent
         totalSearchNumLabel.font = .systemFont(ofSize: 16)
@@ -135,6 +135,37 @@ class SearchResultViewController: UIViewController {
         serachResultCollectionView.collectionViewLayout = layer
     }
     
+    func callRequest(text: String, start: Int, sort: String){
+        
+        let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Naver-Client-Id": APIKey.clientID,
+            "X-Naver-Client-Secret": APIKey.clientSecret]
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=\(start)&sort=\(sort)"
+        
+        let parameters: Parameters = [
+            "query": query
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   parameters: parameters,
+                   headers: headers).responseDecodable(of: Shopping.self) { response in
+            switch response.result {
+            case .success(let success):
+                if start == 1 {
+                    self.searchList = success.items
+                } else {
+                    self.searchList.append(contentsOf: success.items)
+                }
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+        
+    }
+
 }
 
 
@@ -189,17 +220,11 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if searchList.count - 6 <= item.item
-            {
+            if searchList.count - 2 <= item.item {
                 start += 20
-                searchManager.callRequest(text: text, start: start, sort: "sim") { shopping in
-                    if self.start == 1 {
-                        self.searchList = shopping.items
-                    } else {
-                        self.searchList.append(contentsOf: shopping.items)
-                    }
-                    self.start = shopping.items.endIndex
-                }
+                print(start)
+                callRequest(text: text, start: start, sort: "sim")
+                break
             }
         }
     }
