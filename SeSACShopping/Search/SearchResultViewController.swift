@@ -40,7 +40,7 @@ class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         templikeList = likeList ?? []
-        callRequest(text: text, start: start, sort: "sim")
+        callRequest(text: text, start: start, sort: selectType.rawValue)
         registerCell()
         configureView()
         configureLayout()
@@ -86,36 +86,48 @@ class SearchResultViewController: UIViewController {
     
     @objc func changeSortType(_ sender: UIButton){
         if sender.titleLabel?.text == "정확도" {
-            searchManager.callRequest(text: text, start: 1, sort: "sim") { Shopping in
+            selectType = .sim
+            searchManager.callRequest(text: text, start: 1, sort: selectType.rawValue) { Shopping in
                 self.searchList = Shopping.items
                 self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: true)
                 self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
+                self.searchList.removeAll()
+                self.callRequest(text: self.text, start: 1, sort: sortType.sim.rawValue)
             }
         } else if sender.titleLabel?.text == "날짜순" {
-            searchManager.callRequest(text: text, start: 1, sort: "date") { Shopping in
+            selectType = .date
+            searchManager.callRequest(text: text, start: 1, sort: selectType.rawValue) { Shopping in
                 self.searchList = Shopping.items
                 self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: true)
                 self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
+                self.searchList.removeAll()
+                self.callRequest(text: self.text, start: 1, sort: sortType.date.rawValue)
             }
         } else if sender.titleLabel?.text == "가격높은순" {
-            searchManager.callRequest(text: text, start: 1, sort: "dsc") { Shopping in
+            selectType = .dsc
+            searchManager.callRequest(text: text, start: 1, sort: selectType.rawValue) { Shopping in
                 self.searchList = Shopping.items
                 self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: true)
                 self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: false)
+                self.searchList.removeAll()
+                self.callRequest(text: self.text, start: 1, sort: sortType.dsc.rawValue)
             }
         } else if sender.titleLabel?.text == "가격낮은순" {
-            searchManager.callRequest(text: text, start: 1, sort: "asc") { Shopping in
+            selectType = .asc
+            searchManager.callRequest(text: text, start: 1, sort: selectType.rawValue) { Shopping in
                 self.searchList = Shopping.items
                 self.sortBtnStyle(btn: self.sortBtns[0], text: "정확도", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[1], text: "날짜순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[2], text: "가격높은순", isSelected: false)
                 self.sortBtnStyle(btn: self.sortBtns[3], text: "가격낮은순", isSelected: true)
+                self.searchList.removeAll()
+                self.callRequest(text: self.text, start: 1, sort: sortType.asc.rawValue)
             }
         }
     }
@@ -178,8 +190,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         
-        
-        cell.heartBtn.tag = Int(searchList[indexPath.item].productID)!
         cell.heartBtn.addTarget(self, action: #selector(tapHeartBtn), for: .touchUpInside)
         
         
@@ -223,7 +233,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if searchList.count - 2 <= item.item {
                 start += 20
                 print(start)
-                callRequest(text: text, start: start, sort: "sim")
+                callRequest(text: text, start: start, sort: selectType.rawValue)
                 break
             }
         }
