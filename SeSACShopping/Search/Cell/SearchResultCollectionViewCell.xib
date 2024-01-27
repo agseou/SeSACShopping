@@ -24,7 +24,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWA-rz-I2m">
-                        <rect key="frame" x="81" y="81" width="75" height="75"/>
+                        <rect key="frame" x="125.66666666666667" y="125.66666666666667" width="30.333333333333329" height="30.333333333333329"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="HWA-rz-I2m" secondAttribute="height" multiplier="1:1" id="Pdj-Il-hBr"/>
                         </constraints>
@@ -62,6 +62,7 @@
                 <constraint firstItem="ggO-Wv-Jp7" firstAttribute="top" secondItem="PF1-d7-ZEg" secondAttribute="bottom" constant="7" id="EQL-i9-pAV"/>
                 <constraint firstAttribute="trailing" secondItem="PF1-d7-ZEg" secondAttribute="trailing" constant="10" id="Mi2-n3-gx2"/>
                 <constraint firstItem="PF1-d7-ZEg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="b5M-az-nWu"/>
+                <constraint firstItem="HWA-rz-I2m" firstAttribute="width" secondItem="PF1-d7-ZEg" secondAttribute="width" multiplier="0.2" id="dHs-dE-N0m"/>
                 <constraint firstItem="HWA-rz-I2m" firstAttribute="trailing" secondItem="PF1-d7-ZEg" secondAttribute="trailing" constant="-5" id="kyh-wV-81n"/>
                 <constraint firstItem="ggO-Wv-Jp7" firstAttribute="leading" secondItem="PF1-d7-ZEg" secondAttribute="leading" constant="5" id="mdk-kO-AQc"/>
                 <constraint firstItem="PF1-d7-ZEg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="twd-S0-RAF"/>

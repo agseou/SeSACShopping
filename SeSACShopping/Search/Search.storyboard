@@ -56,6 +56,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QZz-Zq-5SE" secondAttribute="trailing" id="5CS-Oc-mQW"/>
                             <constraint firstItem="QZz-Zq-5SE" firstAttribute="top" secondItem="8Ci-uf-QJ5" secondAttribute="bottom" id="6zc-Uc-a5i"/>
@@ -68,6 +69,9 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8TC-17-qJV" secondAttribute="trailing" id="geN-YD-VDm"/>
                             <constraint firstItem="8Ci-uf-QJ5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="msT-8c-taZ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="iqg-a4-Qu5" appends="YES" id="iUH-21-8OG"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="gpi-Na-Jsb"/>
                     <connections>
@@ -75,9 +79,11 @@
                         <outlet property="resentLabel" destination="fKd-XO-Qlm" id="DCj-tz-jyM"/>
                         <outlet property="searchBar" destination="8Ci-uf-QJ5" id="g04-P0-AYv"/>
                         <outlet property="searchHistroyTableView" destination="8TC-17-qJV" id="Ueu-RT-VEQ"/>
+                        <outlet property="tapGesture" destination="iqg-a4-Qu5" id="dVR-yO-4hf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="iqg-a4-Qu5"/>
             </objects>
             <point key="canvasLocation" x="1900" y="-2.1126760563380285"/>
         </scene>
@@ -157,6 +163,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OfT-Og-MXi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ntb-t0-zZg" firstAttribute="leading" secondItem="OfT-Og-MXi" secondAttribute="leading" id="0fL-Yz-m6m"/>
                             <constraint firstItem="ntb-t0-zZg" firstAttribute="top" secondItem="OfT-Og-MXi" secondAttribute="top" id="3GL-Qy-YeS"/>

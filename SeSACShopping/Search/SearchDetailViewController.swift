@@ -16,7 +16,9 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = navTitle
+        let newTitle = navTitle.replacingOccurrences(of: "<b>", with: " ")
+            .replacingOccurrences(of: "</b>", with: " ")
+        navigationItem.title = newTitle
    
         let urlString = "https://msearch.shopping.naver.com/product/\(id ?? "")"
         

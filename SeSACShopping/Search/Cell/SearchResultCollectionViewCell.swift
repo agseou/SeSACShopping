@@ -31,6 +31,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         heartBtn.backgroundColor = .white
         heartBtn.setTitle("", for: .normal)
         heartBtn.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartBtn.tintColor = .black
         DispatchQueue.main.async {
             self.heartBtn.layer.cornerRadius
             = self.heartBtn.bounds.width/2

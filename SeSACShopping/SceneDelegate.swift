@@ -93,7 +93,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let requset = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: calendatTrigger)
             
             // 4. iOS System에 등록
-            // 힌군데에서 받아...???
             UNUserNotificationCenter.current().add(requset)
         }
         

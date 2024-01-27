@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     @IBOutlet var allDeleteBtn: UIButton!
     @IBOutlet var resentLabel: UILabel!
     let searchManager = SearchAPIManager()
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
     
     var searchHistoryList: [String] = []
     
@@ -27,12 +28,16 @@ class SearchViewController: UIViewController {
         navigationController?.tabBarItem = item
 
         allDeleteBtn.addTarget(self, action: #selector(tapAllDeleteBtn), for: .touchUpInside)
-        
+        tapGesture.addTarget(self, action: #selector(tapView))
         
         registerCell()
         configureView()
        
         
+    }
+    
+    @objc func tapView() {
+        view.endEditing(true)
     }
     
     @objc func tapAllDeleteBtn(){
