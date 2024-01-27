@@ -16,7 +16,13 @@ class SearchViewController: UIViewController {
     let searchManager = SearchAPIManager()
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
-    var searchHistoryList: [String] = []
+    let HistoryList = UserDefaultsManager.shared.searchList
+    var searchHistoryList: [String] = [] {
+        didSet { //변경된 직후 -> 프로퍼티 옵저버.
+            searchHistroyTableView.reloadData()
+            UserDefaultsManager.shared.searchList = searchHistoryList
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +35,10 @@ class SearchViewController: UIViewController {
 
         allDeleteBtn.addTarget(self, action: #selector(tapAllDeleteBtn), for: .touchUpInside)
         tapGesture.addTarget(self, action: #selector(tapView))
+        guard let list = HistoryList else {
+            return
+        }
+        searchHistoryList = list
         
         registerCell()
         configureView()
@@ -44,7 +54,6 @@ class SearchViewController: UIViewController {
         searchHistoryList.removeAll()
         resentLabel.isHidden = true
         allDeleteBtn.isHidden = true
-        searchHistroyTableView.reloadData()
     }
     
     func configureView() {
@@ -95,8 +104,6 @@ extension SearchViewController: UISearchBarDelegate {
         
         searchHistroyTableView.isScrollEnabled = true
         searchHistoryList.insert(text, at: 0)
-        UserDefaultsManager.shared.searchList = searchHistoryList
-        searchHistroyTableView.reloadData()
         searchBar.searchTextField.text = nil
         
         let sb = UIStoryboard(name: "Search", bundle: nil)
@@ -158,9 +165,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func tapCancelBtn(_ sender: UIButton) {
         print("tap")
         searchHistoryList.remove(at: sender.tag)
-        UserDefaultsManager.shared.searchList = searchHistoryList
         print(UserDefaultsManager.shared.searchList!)
-        searchHistroyTableView.reloadData()
     }
     
 }
