@@ -65,6 +65,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kzL-2A-m8m"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dcg-ig-zcJ" firstAttribute="trailing" secondItem="ZZN-kj-INb" secondAttribute="trailing" constant="-10" id="0PI-wl-aUe"/>
                             <constraint firstItem="kzL-2A-m8m" firstAttribute="trailing" secondItem="6JU-Vp-VfB" secondAttribute="trailing" constant="20" id="0dg-Hb-MK4"/>
@@ -92,6 +93,9 @@
                             <constraint firstItem="kQ6-eD-pVB" firstAttribute="bottom" secondItem="CAZ-7S-PLK" secondAttribute="bottom" id="rvm-w1-fge"/>
                             <constraint firstItem="kzL-2A-m8m" firstAttribute="trailing" secondItem="ZZN-kj-INb" secondAttribute="trailing" constant="20" id="tOz-3T-na2"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="8lg-gh-l5b" appends="YES" id="iiZ-Im-Jcy"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="ProfileImageBtn" destination="kQ6-eD-pVB" id="oIa-FK-8Xy"/>
@@ -101,9 +105,11 @@
                         <outlet property="nameTextField" destination="hbE-LY-4yp" id="yir-SJ-QmJ"/>
                         <outlet property="noticeLabel" destination="dcg-ig-zcJ" id="LGo-bI-ode"/>
                         <outlet property="profileImageView" destination="CAZ-7S-PLK" id="gVS-Xc-zA9"/>
+                        <outlet property="tapGesture" destination="8lg-gh-l5b" id="BQK-Iv-jKW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ps-dd-qv1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8lg-gh-l5b"/>
             </objects>
             <point key="canvasLocation" x="-587.02290076335873" y="3.5211267605633805"/>
         </scene>

@@ -26,14 +26,21 @@ class ProfileNameSettingViewController: UIViewController {
     @IBOutlet var ProfileImageBtn: UIButton!
     var isAccess: Bool = false
     
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ProfileImageBtn.addTarget(self, action: #selector(tapProfileImageBtn), for: .touchUpInside)
         
         completeBtn.addTarget(self, action: #selector(tapCompleteBtn), for: .touchUpInside)
-        
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.addTarget(self, action: #selector(tapView))
         configureView()
+    }
+    
+    @objc func tapView() {
+        view.endEditing(true)
     }
     
     @objc func tapProfileImageBtn() {
