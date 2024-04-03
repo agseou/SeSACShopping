@@ -12,6 +12,7 @@ class SettingViewController: UIViewController {
     @IBOutlet var settingTableView: UITableView!
     
     let list: [String] = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "처음부터 다시 시작하기"]
+    var count: Int = UserDefaultsManager.shared.likes!.count
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        count = UserDefaultsManager.shared.likes!.count
         settingTableView.reloadData()
     }
     
@@ -100,9 +101,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.textColor = .white
             cell.textLabel?.font = .boldSystemFont(ofSize: 17)
             
-            cell.detailTextLabel?.text = "8개의 상품을 좋아하고 있어요"
+            cell.detailTextLabel?.text = "\(count)개의 상품을 좋아하고 있어요"
             cell.detailTextLabel?.textColor = .white
             cell.detailTextLabel?.font = .boldSystemFont(ofSize: 13)
+            
+
             
             cell.imageView?.image = UIImage(named: UserDefaultsManager.shared.image)
             DispatchQueue.main.async {

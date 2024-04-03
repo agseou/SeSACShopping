@@ -64,11 +64,11 @@
             </objects>
             <point key="canvasLocation" x="-347.32824427480915" y="-389.43661971830988"/>
         </scene>
-        <!--Item-->
+        <!--설정-->
         <scene sceneID="Xoc-sp-Uh9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JuV-L4-1US" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ta1-8B-Klt"/>
+                    <tabBarItem key="tabBarItem" title="설정" image="person" catalog="system" selectedImage="person.fill" id="Ta1-8B-Klt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FOF-hP-MJ9">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -84,4 +84,8 @@
             <point key="canvasLocation" x="-348.85496183206106" y="60.563380281690144"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="person" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+    </resources>
 </document>
