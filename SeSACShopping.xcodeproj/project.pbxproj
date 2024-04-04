@@ -41,6 +41,9 @@
 		A01D3D7A2B5904D600C1AC43 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D3D792B5904D600C1AC43 /* Protocol.swift */; };
 		A05351932B5FFB5A0032FED0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05351922B5FFB5A0032FED0 /* UIViewController+Extension.swift */; };
 		A064D8292B5E93D7005CEB2C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A064D8282B5E93D7005CEB2C /* String+Extension.swift */; };
+		E2E17A1B2BBD583100D09C55 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E2E17A1A2BBD583100D09C55 /* RxCocoa */; };
+		E2E17A1D2BBD583100D09C55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2E17A1C2BBD583100D09C55 /* RxSwift */; };
+		E2E17A1F2BBD656100D09C55 /* ProfileNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E17A1E2BBD656100D09C55 /* ProfileNameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,7 @@
 		A01D3D792B5904D600C1AC43 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		A05351922B5FFB5A0032FED0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A064D8282B5E93D7005CEB2C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		E2E17A1E2BBD656100D09C55 /* ProfileNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +89,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E17A1B2BBD583100D09C55 /* RxCocoa in Frameworks */,
 				A01D3D782B59049600C1AC43 /* Kingfisher in Frameworks */,
+				E2E17A1D2BBD583100D09C55 /* RxSwift in Frameworks */,
 				A01D3D622B59004600C1AC43 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +149,7 @@
 		A01D3D4B2B58FFBE00C1AC43 /* SeSACShopping */ = {
 			isa = PBXGroup;
 			children = (
-				A01D3D652B5900A300C1AC43 /* Resource */,
+				E2E17A182BBD572300D09C55 /* Protocol */,
 				A01D3D642B59009D00C1AC43 /* Extension */,
 				A01D3D632B59009700C1AC43 /* Model */,
 				A01D3D662B5900FE00C1AC43 /* Search */,
@@ -173,18 +179,10 @@
 		A01D3D642B59009D00C1AC43 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				A01D3D792B5904D600C1AC43 /* Protocol.swift */,
 				A064D8282B5E93D7005CEB2C /* String+Extension.swift */,
 				A05351922B5FFB5A0032FED0 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		A01D3D652B5900A300C1AC43 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		A01D3D662B5900FE00C1AC43 /* Search */ = {
@@ -208,9 +206,18 @@
 				A01D3D6E2B5901FD00C1AC43 /* Setting.storyboard */,
 				A01B3EFE2B5A660B004D3F9C /* ProfileImageSettingViewController.swift */,
 				A01B3F052B5A6A04004D3F9C /* ProfileNameSettingViewController.swift */,
+				E2E17A1E2BBD656100D09C55 /* ProfileNameViewModel.swift */,
 				A01B3EFC2B5A6592004D3F9C /* Profile.storyboard */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		E2E17A182BBD572300D09C55 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A01D3D792B5904D600C1AC43 /* Protocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +239,8 @@
 			packageProductDependencies = (
 				A01D3D612B59004600C1AC43 /* Alamofire */,
 				A01D3D772B59049600C1AC43 /* Kingfisher */,
+				E2E17A1A2BBD583100D09C55 /* RxCocoa */,
+				E2E17A1C2BBD583100D09C55 /* RxSwift */,
 			);
 			productName = SeSACShopping;
 			productReference = A01D3D492B58FFBE00C1AC43 /* SeSACShopping.app */;
@@ -264,6 +273,7 @@
 			packageReferences = (
 				A01D3D602B59004600C1AC43 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A01D3D762B59049600C1AC43 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E2E17A192BBD583100D09C55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = A01D3D4A2B58FFBE00C1AC43 /* Products */;
 			projectDirPath = "";
@@ -310,6 +320,7 @@
 				A01D3D692B5901E400C1AC43 /* SettingViewController.swift in Sources */,
 				A01D3D752B5902EB00C1AC43 /* APIKey.swift in Sources */,
 				A05351932B5FFB5A0032FED0 /* UIViewController+Extension.swift in Sources */,
+				E2E17A1F2BBD656100D09C55 /* ProfileNameViewModel.swift in Sources */,
 				A01B3F102B5D42DC004D3F9C /* SearchDetailViewController.swift in Sources */,
 				A01B3F032B5A66C0004D3F9C /* ProfileImageCollectionViewCell.swift in Sources */,
 				A01B3F132B5D4393004D3F9C /* SearchResultCollectionViewCell.swift in Sources */,
@@ -565,6 +576,14 @@
 				minimumVersion = 7.10.2;
 			};
 		};
+		E2E17A192BBD583100D09C55 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -577,6 +596,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A01D3D762B59049600C1AC43 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		E2E17A1A2BBD583100D09C55 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2E17A192BBD583100D09C55 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		E2E17A1C2BBD583100D09C55 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2E17A192BBD583100D09C55 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

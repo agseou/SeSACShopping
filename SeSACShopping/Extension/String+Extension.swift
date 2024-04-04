@@ -18,4 +18,16 @@ extension String {
         
         return formatter.string(from: NSNumber(value: number))
     }
+    
+    func containsSpecialCharacters() -> Bool {
+        // 특수 문자가 포함되어 있는지 여부를 정규 표현식으로 검사
+        let regex = ".*[$#%@]"
+        return self.range(of: regex, options: .regularExpression) != nil
+    }
+    
+    func containsNumbers() -> Bool {
+        // 숫자가 포함되어 있는지 여부를 정규 표현식으로 검사
+        let regex = ".*[0-9].*"
+        return self.range(of: regex, options: .regularExpression) != nil
+    }
 }

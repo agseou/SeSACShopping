@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class OnboardingViewController: UIViewController {
 
@@ -13,13 +15,13 @@ class OnboardingViewController: UIViewController {
     @IBOutlet var subImageView: UIImageView!
     @IBOutlet var startBtn: UIButton!
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        
-        startBtn.addTarget(self, action: #selector(tapStartBtn), for: .touchUpInside)
-        
+        configureBind()
     }
     
     func configureView(){
@@ -39,12 +41,14 @@ class OnboardingViewController: UIViewController {
         
     }
     
-    @objc func tapStartBtn(_ sender: UIButton) {
-        
-        let sb = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: ProfileNameSettingViewController.identifier) as! ProfileNameSettingViewController
-        
-        navigationController?.pushViewController(vc, animated: true)
+    func configureBind() {
+        startBtn.rx.tap
+            .bind(with: self) { owner, _ in
+                let sb = UIStoryboard(name: "Profile", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: ProfileNameSettingViewController.identifier) as! ProfileNameSettingViewController
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
 }

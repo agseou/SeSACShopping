@@ -7,10 +7,12 @@
 
 import Foundation
 
-class UserDefaultsManager {
+final class UserDefaultsManager {
     
+    // 싱글톤 패턴 적용
     static let shared = UserDefaultsManager()
     
+    // 열거형을 통해 UserDefaults 유형 관리
     enum UDKey: String {
         case nickname
         case image
@@ -18,41 +20,27 @@ class UserDefaultsManager {
         case likes
     }
     
+    // UserDefaults 인스턴스의 참조 생성
     let ud = UserDefaults.standard
     
+    
     var nickname: String {
-        get { //가져오고
-            ud.string(forKey: UDKey.nickname.rawValue) ?? "User"
-        }
-        set { //저장하기
-            ud.set(newValue ,forKey: UDKey.nickname.rawValue)
-        }
+        get { ud.string(forKey: UDKey.nickname.rawValue) ?? "User" }
+        set { ud.set(newValue ,forKey: UDKey.nickname.rawValue) }
     }
     
     var image: String {
-        get { //가져오고
-            ud.string(forKey: UDKey.image.rawValue) ?? "profile\(Int.random(in: 1...14))"
-        }
-        set { //저장하기
-            ud.set(newValue ,forKey: UDKey.image.rawValue)
-        }
+        get {  ud.string(forKey: UDKey.image.rawValue) ?? "profile\(Int.random(in: 1...14))" }
+        set { ud.set(newValue ,forKey: UDKey.image.rawValue) }
     }
     
     var searchList: [String]? {
-        get { //가져오고
-            ud.array(forKey: UDKey.searchList.rawValue) as? [String]
-        }
-        set { //저장하기
-            ud.set(newValue ,forKey: UDKey.searchList.rawValue)
-        }
+        get {  ud.array(forKey: UDKey.searchList.rawValue) as? [String] }
+        set { ud.set(newValue ,forKey: UDKey.searchList.rawValue) }
     }
     
     var likes: [Int]? {
-        get { //가져오고
-            ud.array(forKey: UDKey.likes.rawValue) as? [Int]
-        }
-        set { //저장하기
-            ud.set(newValue ,forKey: UDKey.likes.rawValue)
-        }
+        get {ud.array(forKey: UDKey.likes.rawValue) as? [Int] }
+        set { ud.set(newValue ,forKey: UDKey.likes.rawValue) }
     }
 }
