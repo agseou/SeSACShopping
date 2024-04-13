@@ -24,7 +24,7 @@ final class UserDefaultsManager {
     let ud = UserDefaults.standard
     
     var nickname: String {
-        get { ud.string(forKey: UDKey.nickname.rawValue) ?? "User" }
+        get { ud.string(forKey: UDKey.nickname.rawValue) ?? "" }
         set { ud.set(newValue ,forKey: UDKey.nickname.rawValue) }
     }
     

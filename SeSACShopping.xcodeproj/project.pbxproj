@@ -157,6 +157,7 @@
 				A01D3D642B59009D00C1AC43 /* Extension */,
 				A01D3D632B59009700C1AC43 /* Model */,
 				E2C5145E2BCA7EEE0021C172 /* Network */,
+				E2C514632BCAC2B60021C172 /* Service */,
 				A01D3D552B58FFC100C1AC43 /* Assets.xcassets */,
 				A01D3D5A2B58FFC100C1AC43 /* Info.plist */,
 				A01D3D722B59023200C1AC43 /* .gitignore */,
@@ -229,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				A01D3D742B5902EB00C1AC43 /* APIKey.swift */,
-				A01B3F0B2B5D3F7F004D3F9C /* UserDefaultsManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -244,6 +244,14 @@
 				E2E17A1E2BBD656100D09C55 /* ProfileNameViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		E2C514632BCAC2B60021C172 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A01B3F0B2B5D3F7F004D3F9C /* UserDefaultsManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E2E17A182BBD572300D09C55 /* Protocol */ = {
