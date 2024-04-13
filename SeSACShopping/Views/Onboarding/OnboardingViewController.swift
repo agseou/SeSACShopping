@@ -11,12 +11,15 @@ import RxCocoa
 
 class OnboardingViewController: UIViewController {
 
+    // MARK: - Components
     @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var subImageView: UIImageView!
     @IBOutlet var startBtn: UIButton!
     
+    // MARK: - Properties
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycles Func
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +27,7 @@ class OnboardingViewController: UIViewController {
         configureBind()
     }
     
+    // MARK: - Functions
     func configureView(){
         self.view.backgroundColor = .black
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)

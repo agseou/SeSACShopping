@@ -11,6 +11,7 @@ import RxCocoa
 
 class ProfileNameSettingViewController: UIViewController {
     
+    // MARK: - Components
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var noticeLabel: UILabel!
@@ -18,13 +19,14 @@ class ProfileNameSettingViewController: UIViewController {
     @IBOutlet var dividerView: UIView!
     @IBOutlet var cameraIconView: UIImageView!
     @IBOutlet var ProfileImageBtn: UIButton!
-    var isAccess: Bool = false
-    
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
+    // MARK: - Properties
+    var isAccess: Bool = false
     let viewModel = ProfileNameViewModel()
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycles Func
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +36,7 @@ class ProfileNameSettingViewController: UIViewController {
         configureBind()
     }
     
+    // MARK: - Functions
     @objc func tapView() {
         view.endEditing(true)
     }
@@ -114,20 +117,24 @@ class ProfileNameSettingViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        nameTextField.rx.text.orEmpty
-            .bind(to: viewModel.name)
-            .disposed(by: disposeBag)
+        let input = ProfileNameViewModel.Input(name: nameTextField.rx.text.orEmpty.asObservable())
         
-        viewModel.vaildateState
-            .bind(with: self) { owner, value in
-                owner.completeBtn.backgroundColor = value ? .accent : .gray
+        let output = viewModel.transform(input: input)
+        
+        output.nameVaildateState
+            .drive(with: self) { owner, value in
+                owner.noticeLabel.text = value.rawValue
             }
             .disposed(by: disposeBag)
         
-        viewModel.nameVaildateState
-            .map { $0.rawValue }
-            .bind(to: noticeLabel.rx.text)
+        output.vaildateState
+            .drive(with: self) { owner, isEnabled in
+                owner.completeBtn.isEnabled = isEnabled
+                owner.completeBtn.backgroundColor = isEnabled ? .accent : .gray
+                owner.isAccess = isEnabled
+            }
             .disposed(by: disposeBag)
+        
     }
     
 }

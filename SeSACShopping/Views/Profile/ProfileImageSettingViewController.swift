@@ -11,13 +11,16 @@ import RxCocoa
 
 class ProfileImageSettingViewController: UIViewController {
 
+    // MARK: - Components
     @IBOutlet var myProfileImageView: UIImageView!
     @IBOutlet var profileImageCollecionView: UICollectionView!
     
+    // MARK: - Properties
     var userSelect: Int = Int(String(UserDefaultsManager.shared.image.filter(\.isNumber)))!
     
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycles Func
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +31,7 @@ class ProfileImageSettingViewController: UIViewController {
         configureBind()
     }
     
+    // MARK: - Functions
     func configureView(){
         self.view.backgroundColor = .black
         navigationItem.title = "프로필 설정"
