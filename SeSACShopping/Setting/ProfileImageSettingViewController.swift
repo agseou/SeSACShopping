@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfileImageSettingViewController: UIViewController {
 
@@ -14,6 +16,8 @@ class ProfileImageSettingViewController: UIViewController {
     
     var userSelect: Int = Int(String(UserDefaultsManager.shared.image.filter(\.isNumber)))!
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +25,7 @@ class ProfileImageSettingViewController: UIViewController {
         registerCell()
         configureView()
         configureLayout()
+        configureBind()
     }
     
     func configureView(){
@@ -54,6 +59,19 @@ class ProfileImageSettingViewController: UIViewController {
         profileImageCollecionView.collectionViewLayout = layer
     }
     
+    func configureBind() {
+        
+        profileImageCollecionView.rx.itemSelected
+            .withUnretained(self)
+            .bind { owner, indexPath in
+                owner.userSelect = indexPath.row + 1
+                UserDefaultsManager.shared.image = "profile\(owner.userSelect)"
+            }
+            .disposed(by: disposeBag)
+        
+    
+    }
+    
 }
 
 
@@ -79,13 +97,5 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        userSelect = indexPath.row + 1
-        UserDefaultsManager.shared.image = "profile\(userSelect)"
-        collectionView.reloadData()
-    }
-    
     
 }
