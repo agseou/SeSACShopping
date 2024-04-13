@@ -23,7 +23,6 @@ final class UserDefaultsManager {
     // UserDefaults 인스턴스의 참조 생성
     let ud = UserDefaults.standard
     
-    
     var nickname: String {
         get { ud.string(forKey: UDKey.nickname.rawValue) ?? "User" }
         set { ud.set(newValue ,forKey: UDKey.nickname.rawValue) }
@@ -35,12 +34,12 @@ final class UserDefaultsManager {
     }
     
     var searchList: [String]? {
-        get {  ud.array(forKey: UDKey.searchList.rawValue) as? [String] }
+        get { ud.array(forKey: UDKey.searchList.rawValue) as? [String] }
         set { ud.set(newValue ,forKey: UDKey.searchList.rawValue) }
     }
     
     var likes: [Int]? {
-        get {ud.array(forKey: UDKey.likes.rawValue) as? [Int] }
+        get { ud.array(forKey: UDKey.likes.rawValue) as? [Int] }
         set { ud.set(newValue ,forKey: UDKey.likes.rawValue) }
     }
 }
