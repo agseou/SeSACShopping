@@ -143,7 +143,7 @@ class SearchResultViewController: UIViewController {
         serachResultCollectionView.collectionViewLayout = layer
     }
     
-    func callRequest(text: String, start: Int, sort: String){
+    func callRequest(text: String, start: Int, sort: String) {
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let headers: HTTPHeaders = [

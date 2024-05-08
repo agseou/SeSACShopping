@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchHistroyTableView: UITableView!
     @IBOutlet var allDeleteBtn: UIButton!
@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
                                 selectedImage: UIImage(systemName: "magnifyingglass"))
         
         navigationController?.tabBarItem = item
-
+        
         allDeleteBtn.addTarget(self, action: #selector(tapAllDeleteBtn), for: .touchUpInside)
         tapGesture.addTarget(self, action: #selector(tapView))
         guard let list = HistoryList else {
@@ -115,8 +115,15 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = text
-        searchManager.callRequest(text: text, sort: "sim") { Shopping in
-            vc.totalSearchNumLabel.text =  "\(String(Shopping.total).formattedNumber()!) 개의 검색결과"
+        Task {
+            do {
+                let shopping = try await searchManager.callRequest(text: text, sort: "sim")
+                DispatchQueue.main.async {
+                    vc.totalSearchNumLabel.text =  "\(String(shopping.total).formattedNumber()!) 개의 검색결과"
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         
         resentLabel.isHidden = false
@@ -141,7 +148,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if searchHistoryList.isEmpty {
             let cell = tableView.dequeueReusableCell(withIdentifier: EmptyHistoryTableViewCell.identifier) as! EmptyHistoryTableViewCell
-        
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SearchHistoryTableViewCell.identifier, for: indexPath) as! SearchHistoryTableViewCell
@@ -163,8 +170,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
         
         vc.text = searchHistoryList[indexPath.row]
-        searchManager.callRequest(text: searchHistoryList[indexPath.row], sort: "sim") { Shopping in
-            vc.totalSearchNumLabel.text =  "\(String(Shopping.total).formattedNumber()!) 개의 검색결과"
+        Task {
+            do {
+                let shopping = try await  searchManager.callRequest(text: searchHistoryList[indexPath.row], sort: "sim")
+                DispatchQueue.main.async {
+                    vc.totalSearchNumLabel.text =  "\(String(shopping.total).formattedNumber()!) 개의 검색결과"
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         navigationController?.pushViewController(vc, animated: true)
     }

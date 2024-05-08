@@ -17,7 +17,7 @@ class SearchAPIManager {
         "X-Naver-Client-Secret": APIKey.clientSecret]
     
     
-    func callRequest(text: String, sort: String ,completionHandler: @escaping (Shopping) -> Void){
+    func callRequest(text: String, sort: String) async throws -> Shopping {
         
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
@@ -27,21 +27,13 @@ class SearchAPIManager {
             "query": query
         ]
         
-        AF.request(url,
-                   method: .get,
-                   parameters: parameters,
-                   headers: headers).responseDecodable(of: Shopping.self) { response in
-            switch response.result {
-            case .success(let success):
-                //dump(success)
-                
-                completionHandler(success)
-                
-            case .failure(let failure):
-                print(failure)
-            }
-        }
-        
+        return try await AF.request(url,
+                                    method: .get,
+                                    parameters: parameters,
+                                    headers: headers)
+        .validate(statusCode: 200..<300)
+        .serializingDecodable(Shopping.self)
+        .value
     }
     
     func callRequest(text: String, start: Int, sort: String ,completionHandler: @escaping (Shopping) -> Void){
